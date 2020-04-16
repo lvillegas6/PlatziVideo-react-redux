@@ -24,6 +24,7 @@
       "import"
     ],
     "rules": {
+      "arrow-parens": ["error", "as-needed"],
       "react/jsx-props-no-spreading": 0,
       "react/jsx-filename-extension": 0,
       "array-bracket-spacing": 2,
