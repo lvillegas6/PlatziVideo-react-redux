@@ -6,10 +6,10 @@ import Carousel from '../components/Carousel';
 import CarouselItem from '../components/CarouselItem';
 
 const Home = () => {
-  const myList = useSelector(state => state.myList);
-  const trends = useSelector(state => state.trends);
-  const originals = useSelector(state => state.originals);
-  const search = useSelector(state => state.search);
+  const myList = useSelector(state => state.videos.myList);
+  const trends = useSelector(state => state.videos.trends);
+  const originals = useSelector(state => state.videos.originals);
+  const search = useSelector(state => state.videos.search);
   return (
     <>
       <Search isHome />

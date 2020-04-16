@@ -22,7 +22,6 @@ const Login = ({ loginRequest, history }) => {
     loginRequest(form);
     history.push('/');
   };
-
   return (
     <section className='login'>
       <section className='login__container'>

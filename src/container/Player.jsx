@@ -30,7 +30,7 @@ const Player = ({ playing, history, match, getVideoSource }) => {
 };
 
 const mapStateToProps = state => ({
-  playing: state.playing,
+  playing: state.videos.playing,
 });
 const mapDispatchToProps = {
   getVideoSource,
