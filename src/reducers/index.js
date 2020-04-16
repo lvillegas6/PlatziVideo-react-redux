@@ -37,7 +37,8 @@ const reducer = (state, action) => {
     case 'SET_SEARCH_VIDEO':
       return {
         ...state,
-        search: action.payload,
+        search: action.payload ? state.trends.concat(state.originals)
+          .filter(item => item.title.toLowerCase().includes(action.payload.toLowerCase())) : [],
       };
     default:
       return state;

@@ -10,8 +10,6 @@ const Home = () => {
   const trends = useSelector(state => state.trends);
   const originals = useSelector(state => state.originals);
   const search = useSelector(state => state.search);
-  const results = trends.concat(originals).filter(item => item.title.toLowerCase().includes(search.toLowerCase()));
-
   return (
     <>
       <Search isHome />
@@ -26,16 +24,28 @@ const Home = () => {
           ))}
         </Carousel>
       </Categories>
-      <Categories title='Tendencias'>
-        <Carousel>
-          {trends?.length > 0 && trends.map(item => <CarouselItem key={item.id} {...item} />)}
-        </Carousel>
-      </Categories>
-      <Categories title='Originales de platzi Video'>
-        <Carousel>
-          {originals?.length > 0 && originals.map(item => <CarouselItem key={item.id} {...item} />)}
-        </Carousel>
-      </Categories>
+      {
+        search.length > 0 ? (
+          <Categories title='Busqueda'>
+            <Carousel>
+              {search.length > 0 && search.map(item => <CarouselItem key={item.id} {...item} />)}
+            </Carousel>
+          </Categories>
+        ) : (
+          <>
+            <Categories title='Tendencias'>
+              <Carousel>
+                {trends?.length > 0 && trends.map(item => <CarouselItem key={item.id} {...item} />)}
+              </Carousel>
+            </Categories>
+            <Categories title='Originales de platzi Video'>
+              <Carousel>
+                {originals?.length > 0 && originals.map(item => <CarouselItem key={item.id} {...item} />)}
+              </Carousel>
+            </Categories>
+          </>
+        )
+      }
     </>
   );
 };
