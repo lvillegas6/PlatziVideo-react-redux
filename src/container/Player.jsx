@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getVideoSource } from '../actions';
 import isUrl from '../utils/url';
 import '../assets/styles/components/Player.scss';
 
-const Player = ({ playing, history, match, getVideoSource }) => {
+const Player = ({ history, match }) => {
+  const playing = useSelector(state => state.videos.playing);
+  const dispatch = useDispatch();
   const { id } = match.params;
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    getVideoSource(id);
+    dispatch(getVideoSource(id));
     setLoading(true);
   }, []);
 
@@ -29,10 +31,4 @@ const Player = ({ playing, history, match, getVideoSource }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  playing: state.videos.playing,
-});
-const mapDispatchToProps = {
-  getVideoSource,
-};
-export default connect(mapStateToProps, mapDispatchToProps)(Player);
+export default Player;

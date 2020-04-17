@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { setFavorite, deleteFavorite } from '../actions';
@@ -15,15 +15,14 @@ const CarouselItem = ({
   year,
   contentRating,
   duration,
-  setFavorite,
-  deleteFavorite,
   isList,
 }) => {
+  const dispatch = useDispatch();
   const handleSetFavorite = () => {
-    setFavorite({ id, cover, title, year, contentRating, duration });
+    dispatch(setFavorite({ id, cover, title, year, contentRating, duration }));
   };
   const handleDeleteFavorite = itemId => {
-    deleteFavorite(itemId);
+    dispatch(deleteFavorite(itemId));
   };
   return (
     <div className='carousel-item'>
@@ -70,9 +69,4 @@ CarouselItem.propTypes = {
   duration: PropTypes.number,
 };
 
-const mapDispachToProps = {
-  setFavorite,
-  deleteFavorite,
-};
-
-export default connect(null, mapDispachToProps)(CarouselItem);
+export default CarouselItem;
