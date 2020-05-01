@@ -1,17 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import gravatar from '../utils/gravatar';
 import { logoutRequest } from '../actions';
 import '../assets/styles/components/Header.scss';
 import logo from '../assets/static/logo-platzi-video-BW2.png';
 import userIcon from '../assets/static/user-icon.png';
 
-const Header = ({ user, logoutRequest }) => {
+const Header = () => {
+  const user = useSelector(state => state.user.user);
+  const dispatch = useDispatch();
   const hasUser = Object.keys(user).length > 0;
   const handleLogout = () => {
     localStorage.removeItem('user');
-    logoutRequest({});
+    dispatch(logoutRequest({}));
   };
   return (
     <header className='header'>
@@ -46,10 +48,4 @@ const Header = ({ user, logoutRequest }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  user: state.user,
-});
-const mapDispatchToProps = {
-  logoutRequest,
-};
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;

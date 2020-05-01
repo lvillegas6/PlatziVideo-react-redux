@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { registerRequest } from '../actions';
 import '../assets/styles/components/Registro.scss';
 
-const Register = ({ registerRequest, history }) => {
+const Register = ({ history }) => {
+  const dispatch = useDispatch();
   const [form, setValues] = useState({
     email: '',
     name: '',
@@ -21,7 +22,7 @@ const Register = ({ registerRequest, history }) => {
   const handleSubmit = event => {
     event.preventDefault();
     localStorage.setItem('user', JSON.stringify(form));
-    registerRequest(form);
+    dispatch(registerRequest(form));
     history.push('/');
   };
 
@@ -60,7 +61,5 @@ const Register = ({ registerRequest, history }) => {
     </section>
   );
 };
-const mapDispatchToProps = {
-  registerRequest,
-};
-export default connect(null, mapDispatchToProps)(Register);
+
+export default Register;

@@ -1,15 +1,16 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import classNames from 'classnames';
 import { setSearch } from '../actions';
 import '../assets/styles/components/Search.scss';
 
-const Search = ({ search, setSearch, isHome }) => {
+const Search = ({ search, isHome }) => {
+  const dispatch = useDispatch();
   const inputStyle = classNames('input', {
     isHome,
   });
   const handleChange = event => {
-    setSearch(event.target.value);
+    dispatch(setSearch(event.target.value));
   };
   return (
     <section className='main'>
@@ -24,7 +25,4 @@ const Search = ({ search, setSearch, isHome }) => {
     </section>
   );
 };
-const maptDispatchToProps = {
-  setSearch,
-};
-export default connect(null, maptDispatchToProps)(Search);
+export default Search;

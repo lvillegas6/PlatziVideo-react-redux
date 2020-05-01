@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { loginRequest } from '../actions';
 import googleIcon from '../assets/static/google-icon.png';
 import twitterIcon from '../assets/static/twitter-icon.png';
 import '../assets/styles/components/Login.scss';
 
-const Login = ({ loginRequest, history }) => {
+const Login = ({ history }) => {
+  const dispatch = useDispatch();;
   const [form, setValues] = useState({
     email: '',
   });
@@ -19,10 +20,9 @@ const Login = ({ loginRequest, history }) => {
   const handleSubmit = event => {
     event.preventDefault();
     localStorage.setItem('user', JSON.stringify(form));
-    loginRequest(form);
+    dispatch(loginRequest(form));
     history.push('/');
   };
-
   return (
     <section className='login'>
       <section className='login__container'>
@@ -73,7 +73,5 @@ const Login = ({ loginRequest, history }) => {
     </section>
   );
 };
-const mapDispatchToProps = {
-  loginRequest,
-};
-export default connect(null, mapDispatchToProps)(Login);
+
+export default Login;
