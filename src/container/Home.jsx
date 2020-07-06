@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import Header from '../components/Header';
 import Search from '../components/Search';
 import Categories from '../components/Categories';
 import Carousel from '../components/Carousel';
@@ -12,6 +13,7 @@ const Home = () => {
   const search = useSelector(state => state.videos.search);
   return (
     <>
+      <Header />
       <Search isHome />
       <Categories title='Mi lista'>
         <Carousel>

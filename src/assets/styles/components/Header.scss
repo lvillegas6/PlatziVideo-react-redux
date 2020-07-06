@@ -50,6 +50,11 @@
     display: flex;
     cursor: pointer;
   }
+
+  .isLogin, .isRegister {
+    background-color: #21c08b;
+  }
+  
   
   .header__menu--profile img {
     margin-right: 8px;

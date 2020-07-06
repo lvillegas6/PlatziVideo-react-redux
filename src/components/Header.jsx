@@ -1,22 +1,30 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import classNames from 'classnames';
 import gravatar from '../utils/gravatar';
-import { logoutRequest } from '../actions';
-import '../assets/styles/components/Header.scss';
 import logo from '../assets/static/logo-platzi-video-BW2.png';
 import userIcon from '../assets/static/user-icon.png';
+import { logoutRequest } from '../actions';
+import '../assets/styles/components/Header.scss';
 
-const Header = () => {
+const Header = props => {
+  const { isLogin, isRegister } = props;
   const user = useSelector(state => state.user.user);
   const dispatch = useDispatch();
   const hasUser = Object.keys(user).length > 0;
+
+  const headerClass = classNames('header', {
+    isLogin,
+    isRegister,
+  });
+
   const handleLogout = () => {
     localStorage.removeItem('user');
     dispatch(logoutRequest({}));
   };
   return (
-    <header className='header'>
+    <header className={headerClass}>
       <Link to='/'>
         <img className='header__img' src={logo} alt='Platzi Video' />
       </Link>
